@@ -1,0 +1,7 @@
+{
+  "name": "Ionic-PizzaApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
