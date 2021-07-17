@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Pizza App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+  <ion-content>
+    <ion-grid>
+      <ion-row  size-md="1">
+        <ion-col class="ion-margin-vertical ion-text-right" size-md="6">
+          <ion-avatar>
+            <ion-img src = "https://media.istockphoto.com/vectors/pizza-party-vector-id166009481?k=6&m=166009481&s=612x612&w=0&h=pV5h9E6XQsH_Sj_449hmRxjFwDjtJUAt7q2o_QDdfto="></ion-img>
+          </ion-avatar>
+        </ion-col>
+        <ion-col class="ion-margin-vertical" size-md="6">
+          <ion-button color="primary">My Order</ion-button>
+        </ion-col>
+      </ion-row>
+      <br>
+      <ion-row>
+        <ion-label size-md="1" id="orderQtyLabel">Quantity: {{orderQuantityAmount}}</ion-label>
+
+      </ion-row>
+      <br>
+      <ion-row>
+        <ion-col size-xl="1"></ion-col>
+        <ion-col size-xl="1"><ion-button expand="block" id="one" (click) ="numberButtonPress(1)">1</ion-button></ion-col>
+        <ion-col size-xl="1"><ion-button expand="block" id="two" (click) ="numberButtonPress(2)">2</ion-button></ion-col>
+        <ion-col size-xl="1"><ion-button expand="block" id="three" (click) ="numberButtonPress(3)">3</ion-button></ion-col>
+        <ion-col size-xl="8"></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-xl="1"></ion-col>
+        <ion-col size-xl="1"><ion-button expand="block" id="four" (click) ="numberButtonPress(4)">4</ion-button></ion-col>
+        <ion-col size-xl="1"><ion-button expand="block" id="five" (click) ="numberButtonPress(5)">5</ion-button></ion-col>
+        <ion-col size-xl="1"><ion-button expand="block" id="six" (click) ="numberButtonPress(6)">6</ion-button></ion-col>
+        <ion-col size-xl="8"></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-xl="1"></ion-col>
+        <ion-col size-xl="1"><ion-button expand="block"  id="seven" (click) ="numberButtonPress(7)">7</ion-button></ion-col>
+        <ion-col size-xl="1"><ion-button expand="block" id="eight" (click) ="numberButtonPress(8)">8</ion-button></ion-col>
+        <ion-col size-xl="1"><ion-button expand="block" id="nine" (click) ="numberButtonPress(9)">9</ion-button></ion-col>
+        <ion-col size-xl="8"></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-xl="1"></ion-col>
+        <ion-col size-xl="1"><ion-button expand="block" fill="outline" color="danger" id="reset" (click) ="resetBtn()">Reset</ion-button></ion-col>
+        <ion-col size-xl="1"><ion-button expand="block" id="zero" (click) ="numberButtonPress(0)">0</ion-button></ion-col>
+        <ion-col size-xl="1"><ion-button expand="block" color="success" id="add" (click) ="addBtn()">Add</ion-button></ion-col>
+        <ion-col size-xl="8"></ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="3">
+          <ion-list>
+            <ion-list-header>Topping: {{topping}}</ion-list-header>
+            <ion-item *ngFor ="let pieTopping of toppingItems" (click) ="toppingSelect(pieTopping)">
+              {{pieTopping}}
+            </ion-item>
+            </ion-list>
+            </ion-col>
+            <ion-col size-sm="3">
+              <ion-list>
+            <ion-list-header>Size: {{size}}</ion-list-header>
+            <ion-item *ngFor ="let pieSize of sizeItems" (click) ="sizeSelect(pieSize)">
+              {{pieSize}}
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
