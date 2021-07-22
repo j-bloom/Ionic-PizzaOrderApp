@@ -17,6 +17,7 @@ export class PizzaOrderPage implements OnInit {
   orderCost = 0;
   toppingItems: string[] = ['Cheese', 'Pepperoni', 'Hawian', 'Peppers', 'Sausage', 'Vegitarian'];
   sizeItems: string[] = ['Small', 'Medium', 'Large', 'Extra Large', 'Party'];
+  headerImg: string = "https://media.istockphoto.com/vectors/pizza-party-vector-id166009481?k=6&m=166009481&s=612x612&w=0&h=pV5h9E6XQsH_Sj_449hmRxjFwDjtJUAt7q2o_QDdfto=";
 
   alertMessage: string;
 
@@ -36,6 +37,15 @@ export class PizzaOrderPage implements OnInit {
       header: 'Order',
       message: 'Your order now has ' + this.totalOrderQuantity + ' pizza\'s and your total is $' + this.totalOrderPrice,
       buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  async missingOrderInfo() {
+    const alert = await this.alertController.create({
+      header:'Missing Information',
+      message:'Please ensure orders contain a quantity, topping and size',
+      buttons:['OK']
     });
     await alert.present();
   }
@@ -68,13 +78,20 @@ export class PizzaOrderPage implements OnInit {
   }
 
   addBtn() {
-    this.totalOrderQuantity += this.orderQuantityAmount;
+    if(this.orderQuantityAmount == 0 || 
+      (this.topping == '') || 
+      (this.size == '')){
+      this.missingOrderInfo();
+      this.resetLabel();
+    } else {
+      this.totalOrderQuantity += this.orderQuantityAmount;
 
-    this.pizzaPrices();
-    this.addAlert();
-    this.resetLabel();
+      this.pizzaPrices();
+      this.addAlert();
+      this.resetLabel();
 
-    return this.totalOrderQuantity;
+      return this.totalOrderQuantity;
+    }
   }
 
   resetLabel() {
