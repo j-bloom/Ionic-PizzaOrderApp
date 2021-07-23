@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Order Options</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-xl="3"></ion-col>
+      <ion-col size-xl="6">
+        <ion-button expand="block" class="ion-margin-vertical" [routerLink]="['/order-current']">Check Current Order</ion-button>
+        <ion-button expand="block" class="ion-margin-vertical" [routerLink]="['/pizza-order']">Update Current Order</ion-button>
+        <ion-button expand="block" class="ion-margin-vertical" [routerLink]="['/order-previous']">Previous Orders</ion-button>
+        <ion-button expand="block" class="ion-margin-vertical" [routerLink]="['/pizza-order']">New Order</ion-button>
+      </ion-col>
+      <ion-col size-xl="3"></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

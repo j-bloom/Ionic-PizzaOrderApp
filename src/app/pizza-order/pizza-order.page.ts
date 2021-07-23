@@ -1,5 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Order } from './order.model';
 
 @Component({
   selector: 'app-pizza-order',
@@ -8,16 +9,16 @@ import { AlertController } from '@ionic/angular';
 })
 export class PizzaOrderPage implements OnInit {
 
-
   @Output() orderQuantityAmount = 0;
   @Output() topping: string;
   @Output() size: string;
+
   totalOrderPrice = 0;
   totalOrderQuantity = 0;
   orderCost = 0;
   toppingItems: string[] = ['Cheese', 'Pepperoni', 'Hawian', 'Peppers', 'Sausage', 'Vegitarian'];
   sizeItems: string[] = ['Small', 'Medium', 'Large', 'Extra Large', 'Party'];
-  headerImg: string = "https://media.istockphoto.com/vectors/pizza-party-vector-id166009481?k=6&m=166009481&s=612x612&w=0&h=pV5h9E6XQsH_Sj_449hmRxjFwDjtJUAt7q2o_QDdfto=";
+  headerImg: string = 'https://media.istockphoto.com/vectors/pizza-party-vector-id166009481?k=6&m=166009481&s=612x612&w=0&h=pV5h9E6XQsH_Sj_449hmRxjFwDjtJUAt7q2o_QDdfto=';
 
   alertMessage: string;
 
@@ -78,9 +79,9 @@ export class PizzaOrderPage implements OnInit {
   }
 
   addBtn() {
-    if(this.orderQuantityAmount == 0 || 
-      (this.topping == '') || 
-      (this.size == '')){
+    if(this.orderQuantityAmount === 0 ||
+      (this.topping === '') ||
+      (this.size === '')){
       this.missingOrderInfo();
       this.resetLabel();
     } else {
@@ -91,6 +92,7 @@ export class PizzaOrderPage implements OnInit {
       this.resetLabel();
 
       return this.totalOrderQuantity;
+
     }
   }
 
