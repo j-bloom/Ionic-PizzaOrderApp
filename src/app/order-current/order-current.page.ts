@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PizzaOrderService } from '../services/pizza-order.service';
+import { Pizza } from '../services/order.model';;
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -9,7 +10,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class OrderCurrentPage implements OnInit {
 
-  pizzaList = [];
+  pizzaList: Pizza[] = [];
   orderList = [];
   timeOfOrder: any;
 
@@ -24,6 +25,18 @@ export class OrderCurrentPage implements OnInit {
     this.timeOfOrder = this.orderService.processOrderTime();
     console.log(this.timeOfOrder);
     this.confirmationAlert();
+  }
+
+  getPizzaList() {
+    return this.orderService.getAllPizzas();
+  }
+
+  getPizzaPrice(aPizza: Pizza) {
+    return this.orderService.getPizzaPrice(aPizza);
+  }
+
+  removePizza(aPizza: Pizza) {
+    this.orderService.removePizza(aPizza);
   }
 
   async confirmationAlert() {
