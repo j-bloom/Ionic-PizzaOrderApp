@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Pizza, CurrentOrder } from './order.model';
+import { Pizza, CurrentOrder } from '../services/order.model';
 import { PizzaOrderService } from '../services/pizza-order.service';
 
 @Component({
@@ -26,10 +26,10 @@ export class PizzaOrderPage implements OnInit {
 
   alertMessage: string;
 
-  constructor(
-    public alertController: AlertController, orderService: PizzaOrderService) { }
+  constructor(public alertController: AlertController, private orderService: PizzaOrderService) { }
 
   ngOnInit() {
+    this.totalOrderQuantity = this.orderService.getAllPizzas().length;
   }
 
 
@@ -66,21 +66,14 @@ export class PizzaOrderPage implements OnInit {
 
       if(this.sizeSelect(this.size) === 'Small') {
         this.totalOrderPrice += (this.orderQuantityAmount * smallPizzaPrice);
-        return this.totalOrderPrice;
       }else if(this.sizeSelect(this.size) === 'Medium') {
         this.totalOrderPrice += (this.orderQuantityAmount * mediumPizzaPrice);
-        return this.totalOrderPrice;
       }else if(this.sizeSelect(this.size) === 'Large') {
         this.totalOrderPrice += (this.orderQuantityAmount * largePizzaPrice);
-        return this.totalOrderPrice;
       }else if(this.sizeSelect(this.size) === 'Extra Large') {
         this.totalOrderPrice += (this.orderQuantityAmount * xLPizzaPrice);
-        return this.totalOrderPrice;
       }else if(this.sizeSelect(this.size) === 'Party') {
         this.totalOrderPrice += (this.orderQuantityAmount * partyPizzaPrice);
-        return this.totalOrderPrice;
-      }else {
-        return this.totalOrderPrice;
       }
   }
 
@@ -91,14 +84,16 @@ export class PizzaOrderPage implements OnInit {
       this.missingOrderInfo();
       this.resetLabel();
     } else {
-      this.totalOrderQuantity += this.orderQuantityAmount;
-
-      this.pizzaPrices();
+      var newPizza: Pizza = {
+        quantity: this.orderQuantityAmount,
+        pizzaTopping: this.topping,
+        pizzaSize: this.size
+      };
+      this.orderService.addPizza(newPizza);
+      this.totalOrderQuantity = this.orderService.getOrderSize();
+      this.totalOrderPrice = this.orderService.getOrderPrice();
       this.addAlert();
       this.resetLabel();
-
-      return this.totalOrderQuantity;
-
     }
   }
 

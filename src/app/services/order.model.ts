@@ -9,3 +9,14 @@ export interface CurrentOrder {
   totalOrderPrice: number;
   totalOrderQuantity: number;
 }
+
+export interface PreviousOrder {
+  orderDate: Date;
+  totalOrderPrice: number;
+  totalOrderQuantity: number;
+} 
+
+export interface PizzaPrice {
+  pizzaSize: string;
+  price: number;
+}
