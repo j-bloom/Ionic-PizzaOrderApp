@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PizzaOrderService } from '../services/pizza-order.service';
-import { Pizza } from '../services/order.model';;
+import { Pizza, PreviousOrder } from '../services/order.model';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -21,11 +21,17 @@ export class OrderCurrentPage implements OnInit {
     this.orderList = this.pizzaList;
   }
 
+  
   processOrder() {
-    this.timeOfOrder = this.orderService.processOrderTime();
-    console.log(this.timeOfOrder);
+    var processOrder: PreviousOrder = {
+      orderDate: this.orderService.processOrderTime(),
+      totalOrderPrice: this.orderService.getOrderPrice(),
+      totalOrderQuantity: this.orderService.getOrderSize()
+    };
+    this.orderService.addPreviousOrder(processOrder);
     this.confirmationAlert();
   }
+
 
   getPizzaList() {
     return this.orderService.getAllPizzas();
@@ -48,5 +54,12 @@ export class OrderCurrentPage implements OnInit {
     await alert.present();
   }
 
+  getTotalQuantity() {
+    return this.orderService.getOrderSize();
+  }
+
+  getTotalPrice() {
+    return this.orderService.getOrderPrice();
+  }
 
 }

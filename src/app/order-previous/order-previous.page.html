@@ -9,13 +9,13 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor = "let prev of previousOrderList">
+    <ion-item *ngFor = "let prev of loadPreviousOrders()">
       <ion-grid>
         <ion-row>
-          {{ prev }}
+          {{ prev.orderDate }}
         </ion-row>
         <ion-row>
-          order total
+          {{ prev.totalOrderPrice }}
         </ion-row>
       </ion-grid>
     </ion-item>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Pizza, CurrentOrder } from '../services/order.model';
+import { Pizza } from '../services/order.model';
 import { PizzaOrderService } from '../services/pizza-order.service';
 
 @Component({
@@ -12,9 +12,6 @@ export class PizzaOrderPage implements OnInit {
 
   @Input() topping: string;
   @Input() size: string;
-
-  pizza: Pizza[];
-  currentOrder: CurrentOrder[];
 
   orderQuantityAmount: number;
   totalOrderPrice = 0;
@@ -57,26 +54,6 @@ export class PizzaOrderPage implements OnInit {
     await alert.present();
   }
 
-  pizzaPrices() {
-    const smallPizzaPrice = 9.99;
-    const mediumPizzaPrice = 14.99;
-    const largePizzaPrice = 19.99;
-    const xLPizzaPrice = 24.99;
-    const partyPizzaPrice = 29.99;
-
-      if(this.sizeSelect(this.size) === 'Small') {
-        this.totalOrderPrice += (this.orderQuantityAmount * smallPizzaPrice);
-      }else if(this.sizeSelect(this.size) === 'Medium') {
-        this.totalOrderPrice += (this.orderQuantityAmount * mediumPizzaPrice);
-      }else if(this.sizeSelect(this.size) === 'Large') {
-        this.totalOrderPrice += (this.orderQuantityAmount * largePizzaPrice);
-      }else if(this.sizeSelect(this.size) === 'Extra Large') {
-        this.totalOrderPrice += (this.orderQuantityAmount * xLPizzaPrice);
-      }else if(this.sizeSelect(this.size) === 'Party') {
-        this.totalOrderPrice += (this.orderQuantityAmount * partyPizzaPrice);
-      }
-  }
-
   addBtn() {
     if(this.orderQuantityAmount === 0 ||
       (this.topping === '') ||
@@ -105,8 +82,7 @@ export class PizzaOrderPage implements OnInit {
 
   resetBtn() {
     this.resetLabel();
-    this.totalOrderQuantity = 0;
-    this.totalOrderPrice = 0;
+    this.orderService.resetCurrentOrder();
   }
 
   toppingSelect(topping) {

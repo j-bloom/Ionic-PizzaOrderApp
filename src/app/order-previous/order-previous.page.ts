@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PizzaOrderService } from '../services/pizza-order.service';
+import { PreviousOrder } from '../services/order.model';
 
 @Component({
   selector: 'app-order-previous',
@@ -8,14 +9,14 @@ import { PizzaOrderService } from '../services/pizza-order.service';
 })
 export class OrderPreviousPage implements OnInit {
 
-  previousOrderList = [];
+  previousOrder: PreviousOrder;
 
   constructor(private orderService: PizzaOrderService) { }
 
-  ngOnInit() {
-    //BUG: Currently the line below break the "Previous Orders" page
+  ngOnInit() {}
 
-    this.previousOrderList = this.orderService.timeOfOrder();
+  loadPreviousOrders() {
+    return this.orderService.getAllPreviousOrders();
   }
 
 }

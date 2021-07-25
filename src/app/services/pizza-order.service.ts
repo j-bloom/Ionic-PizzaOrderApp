@@ -63,8 +63,16 @@ export class PizzaOrderService {
     return this.timeOfOrder;
   }
 
+  getAllPreviousOrders(){
+    return this.previousOrders;
+  }
+
   addPizza(newPizza: Pizza) {
     this.pizza.push(newPizza);
+  }
+
+  addPreviousOrder(previousOrders: PreviousOrder) {
+    this.previousOrders.push(previousOrders);
   }
 
   removePizza(oldPizza: Pizza) {
