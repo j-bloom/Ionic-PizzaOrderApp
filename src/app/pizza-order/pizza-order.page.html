@@ -64,8 +64,8 @@
             <ion-col size-sm="3">
               <ion-list>
             <ion-list-header>Size: {{size}}</ion-list-header>
-            <ion-item *ngFor ="let pieSize of sizeItems" (click) ="sizeSelect(pieSize)">
-              {{pieSize}}
+            <ion-item *ngFor ="let size of sizeItems" (click) ="sizeSelect(size)">
+              {{size}}
             </ion-item>
           </ion-list>
         </ion-col>

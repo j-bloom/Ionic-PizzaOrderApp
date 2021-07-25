@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Order } from './order.model';
+import { Pizza, CurrentOrder } from './order.model';
+import { PizzaOrderService } from '../services/pizza-order.service';
 
 @Component({
   selector: 'app-pizza-order',
@@ -9,23 +10,28 @@ import { Order } from './order.model';
 })
 export class PizzaOrderPage implements OnInit {
 
-  @Output() orderQuantityAmount = 0;
-  @Output() topping: string;
-  @Output() size: string;
+  @Input() topping: string;
+  @Input() size: string;
 
+  pizza: Pizza[];
+  currentOrder: CurrentOrder[];
+
+  orderQuantityAmount: number;
   totalOrderPrice = 0;
   totalOrderQuantity = 0;
   orderCost = 0;
   toppingItems: string[] = ['Cheese', 'Pepperoni', 'Hawian', 'Peppers', 'Sausage', 'Vegitarian'];
   sizeItems: string[] = ['Small', 'Medium', 'Large', 'Extra Large', 'Party'];
-  headerImg: string = 'https://media.istockphoto.com/vectors/pizza-party-vector-id166009481?k=6&m=166009481&s=612x612&w=0&h=pV5h9E6XQsH_Sj_449hmRxjFwDjtJUAt7q2o_QDdfto=';
+  headerImg = 'https://media.istockphoto.com/vectors/pizza-party-vector-id166009481?k=6&m=166009481&s=612x612&w=0&h=pV5h9E6XQsH_Sj_449hmRxjFwDjtJUAt7q2o_QDdfto=';
 
   alertMessage: string;
 
-  constructor(public alertController: AlertController) { }
+  constructor(
+    public alertController: AlertController, orderService: PizzaOrderService) { }
 
   ngOnInit() {
   }
+
 
   numberButtonPress(num: number) {
     if(typeof(num) === typeof(this.totalOrderQuantity)){
@@ -109,11 +115,13 @@ export class PizzaOrderPage implements OnInit {
   }
 
   toppingSelect(topping) {
-    return this.topping = topping;
+    this.topping = topping;
+    return this.topping;
   }
 
   sizeSelect(size) {
-    return this.size = size;
+    this.size = size;
+    return this.size;
   }
 
 }
